@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Create symlinks to the $HOME directory
 #

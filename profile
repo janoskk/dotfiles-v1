@@ -10,7 +10,7 @@ if [ "$(uname -s)" = "Linux" ] || [ "$(uname -s)" = "Darwin" ]; then
     ### Linux/macOS-specific settings
     ###
 
-    export PATH="$HOME/Git/scripts:$PATH"
+    export PATH="$HOME/Git/scripts:$HOME/bin:$PATH"
     export PYENV_ROOT="$HOME/.pyenv"
     export PYENV_VERSION="3.9.1"
     export REPO="$HOME/Git/plex-media-server"
