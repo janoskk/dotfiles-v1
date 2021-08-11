@@ -24,16 +24,17 @@ if [ "$(uname -s)" = "Linux" ] || [ "$(uname -s)" = "Darwin" ]; then
         ###
         ### Linux-specific settings
         ###
-        function sqlite_pms() {
+        function plex-sqlite() {
             rlwrap ~/Git/plex-media-server/build/build/Plex\ Media\ Server --sqlite ~/Library/Application\ Support/Plex\ Media\ Server/Plug-in\ Support/Databases/com.plexapp.plugins.library.db
         }
+        alias plex-virtual-tuner="$HOME/Git/plex-media-server/scripts/test/VirtualTuner.py -l -c $HOME/Git/plex-media-server/scripts/test/sample-tuner-config.json"
     else
         ###
         ### macOS-specific settings
         ###
         export PATH="/Applications/kdiff3.app/Contents/MacOS:$PATH"
         export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-        function sqlite_pms() {
+        function plex-sqlite() {
             rlwrap ~/Git/plex-media-server/build/Plex\ Media\ Server.app/Contents/MacOS/Plex\ Media\ Server sqlite ~/Library/Application\ Support/Plex\ Media\ Server/Plug-in\ Support/Databases/com.plexapp.plugins.library.db
         }
     fi
