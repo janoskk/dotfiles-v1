@@ -42,6 +42,8 @@ else
     ###
     ###  Win-specific settings
     ###
+
+    export LOG_PMS="/c/Users/janoskk/AppData/Local/Plex Media Server/Logs/Plex Media Server.log"
     #
     # Open the directory passed to open
     #
