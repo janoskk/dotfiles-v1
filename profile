@@ -27,7 +27,15 @@ if [ "$(uname -s)" = "Linux" ] || [ "$(uname -s)" = "Darwin" ]; then
         function plex-sqlite() {
             rlwrap ~/Git/plex-media-server/build/build/Plex\ Media\ Server --sqlite ~/Library/Application\ Support/Plex\ Media\ Server/Plug-in\ Support/Databases/com.plexapp.plugins.library.db
         }
+        function vs-kill() {
+            kill -9 `ps ax | grep "remoteExtensionHostAgent.js" | grep -v grep | awk '{print $1}'`
+            kill -9 `ps ax | grep "watcherService" | grep -v grep | awk '{print $1}'`
+        }
         alias plex-virtual-tuner="$HOME/Git/plex-media-server/scripts/test/VirtualTuner.py -l -c $HOME/Git/plex-media-server/scripts/test/sample-tuner-config.json"
+        alias win-start="sudo virsh start --domain janoskk-wyzen-v"
+        alias win-shutdown="sudo virsh shutdown --domain janoskk-wyzen-v"
+        alias win-suspend="sudo virsh suspend --domain janoskk-wyzen-v"
+        alias win-resume="sudo virsh resume --domain janoskk-wyzen-v"
     else
         ###
         ### macOS-specific settings
@@ -128,6 +136,36 @@ function close-branch {
     if [ "$a" = "y" ] || [ "$a" = "Y" ]; then
         git branch --merged | egrep -v "(^\*|master|develop)" | xargs git branch -d
     fi
+}
+
+#
+# Create a new release note file with a template
+#
+unalias new-release-note 2>/dev/null
+function new-release-note {
+    if [ "$1" = "" ]; then
+        echo "Missing file name!"
+        return
+    fi
+    cat <<EOF >> "$1"
+NEW:
+- (Collections) Note (#12345)
+
+FIXES:
+- (Collections) Note (#12345)
+
+INTERNAL:
+- (Collections) Note (#12345)
+EOF
+    vim "$1"
+}
+
+#
+# Show build time of each files
+#
+unalias build-time 2>/dev/null
+function build-time {
+    awk '{print $2-$1 " " $0}' build/.ninja_log | sort -n
 }
 
 export LESS="--RAW-CONTROL-CHARS --long-prompt --line-numbers --ignore-case --status-column"
